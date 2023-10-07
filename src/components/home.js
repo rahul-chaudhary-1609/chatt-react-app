@@ -25,7 +25,7 @@ function Home(){
     useEffect(()=>{
         if(searchText){
             getChatData().then((data)=>{
-                let filterChatList = data.filter(chat => (chat.title.includes(searchText) || chat.orderId.includes(searchText)));
+                let filterChatList = data.filter(chat => (chat.title.toLowerCase().includes(searchText.toLowerCase()) || chat.orderId.includes(searchText)));
                 setChatList(filterChatList);
             }).catch(error=>console.log(error));
         }else{
