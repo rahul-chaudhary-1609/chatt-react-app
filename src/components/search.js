@@ -1,9 +1,10 @@
 import "./styles.css";
 
-function Search(props){
+function Search({searchText,setSearchText}){
+
     return(
         <>
-            <input type={"text"} placeholder="Start typing to search"/>
+            <input type={"text"} placeholder="Start typing to search" onChange={(e)=>setSearchText(e.target.value)}/>
         </>
     )
 }

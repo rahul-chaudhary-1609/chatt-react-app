@@ -7,7 +7,7 @@ function ChatWindow({selectedChatCard}){
             </div>
             <div className="chat-window-area">
                 {
-                    selectedChatCard.messageList.map((msg,index)=>{
+                    selectedChatCard?.messageList?.map((msg,index)=>{
                         return (
                             <div key={index} className={msg.sender=="BOT" ? "chat-window-area-msg-bot" : "chat-window-area-msg-user"}>
                                 {msg.message}

@@ -10,20 +10,35 @@ function Home(){
 
     const [chatList, setChatList]= useState([]);
     const [selectedChatCard, setSelectedChatCard]= useState({});
+    const [searchText, setSearchText]= useState("");
 
-    useEffect(()=>{
+    const fetchData = ()=>{
         getChatData().then((data)=>{
-            console.log(data);
             setChatList(data)
         }).catch(error=>console.log(error));
+    }
+
+    useEffect(()=>{
+       fetchData();
     },[])
+
+    useEffect(()=>{
+        if(searchText){
+            getChatData().then((data)=>{
+                let filterChatList = data.filter(chat => (chat.title.includes(searchText) || chat.orderId.includes(searchText)));
+                setChatList(filterChatList);
+            }).catch(error=>console.log(error));
+        }else{
+            fetchData();
+        }
+    },[searchText])
 
     return (
         <div className="main">
             <div className="chat-list-main">
                 <div className="search-div">
                     <h3>Filter by Title/Order ID</h3>
-                    <Search/>
+                    <Search searchText={searchText} setSearchText={setSearchText}/>
                 </div>
                 <ChatList chatList={chatList} setSelectedChatCard={setSelectedChatCard}/>
             </div>
